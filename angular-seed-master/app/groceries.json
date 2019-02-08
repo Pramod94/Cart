@@ -1,0 +1,24 @@
+[
+    {
+      "image" : "https://upload.wikimedia.org/wikipedia/commons/f/f7/Bananas.svg",
+      "name": "Banana",
+      "quantity" : 1,
+      "price" : 50,
+      "description" : "Rich in fiber"
+      
+    },
+    {
+      "image" : "https://upload.wikimedia.org/wikipedia/commons/c/cd/Carrot.svg",
+      "name": "Carrot",
+      "quantity" : 1,
+      "price" : 30,
+      "description" : "Rich in vitemin" 
+    },
+    {
+      "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Green_grapes_icon.svg/428px-Green_grapes_icon.svg.png",
+      "name": "Grapes",
+      "quantity" : 1,
+      "price" : 80,
+      "description" : "Rich in Protein"
+    }
+  ]

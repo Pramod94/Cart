@@ -1,0 +1,22 @@
+
+<a class="btn btn-outline-primary" href="#!/view1">Shoping Items List</a>
+
+<div class="container">
+  <h3>Cart Items</h3>
+  <p> <strong> Total : </strong>{{grossTotal}}
+      <br><br>
+      <button class="btn btn-outline-danger" ng-click="clearCart()">Clear Cart</button>
+    </p>
+<table class="table table-hover">
+  <tr ng-repeat="gitems in cartItem">
+    <td>{{gitems.name}}</td>
+    <td>
+     <a href="" ng-click="decrease($index)" class="fa fa-minus-square" style="text-decoration: none;font-size:25px;color:red"></a> 
+       {{gitems.quantity}}
+       <a href="" ng-click="increase(gitems)" class="fa fa-plus-square" style="text-decoration: none;font-size:25px;color: green"></a> 
+      </td>
+    <td>{{gitems.price}}</td>
+    <td><button class="cbtn" ng-click="deleteItem($index)"><i class="fa fa-trash"></i></button></td>
+  </tr> 
+</table>
+</div>

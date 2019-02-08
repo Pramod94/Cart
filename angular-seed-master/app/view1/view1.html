@@ -1,0 +1,81 @@
+
+
+<a class="btn btn-outline-primary" href="#!/view2">Goto Cart</a>
+
+<div class="container">
+
+  <h2>Shoping Items List</h2>
+  <br>
+
+  <p><strong>Search Item : </strong><input type="text" ng-model="searchItem"></p>
+  <br>
+
+
+  <table class="table table-hover">
+    <tr class="thead-dark">
+      <th>Item</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+
+    <tr ng-repeat="list in shoping | filter:searchItem">
+      <td><img ng-src="{{list.image}}" alt="image" width="50px" height="50px"></td>
+      <td><a href="" data-toggle="modal" data-target="#itemDesc" style="text-decoration:none">{{list.name}}</a></td>
+      <td>{{list.quantity}}</td>
+      <td>{{list.price}}</td>
+      <td><a class="btn btn-outline-success" href="" ng-click="addToCart(list)">Add to Cart</a></td>
+    </tr>
+  </table>
+
+</div>
+
+<div ng-show="displayAlert" class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Item added successfully...!</strong>
+  </div>
+
+<div class="modal fade" id="itemDesc" ng-repeat="list in shoping">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{list.name}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        {{list.description}}
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div ng-show="showCart" class="container">
+  <h3>Cart Items</h3>
+  <p> <strong> Total : </strong>{{grossTotal}}
+    <br><br>
+    <button class="btn btn-outline-danger" ng-click="clearCart()">Clear Cart</button>
+  </p>
+  <table class="table table-hover">
+    <tr ng-repeat="gitems in cartItem">
+      <td>{{gitems.name}}</td>
+      <td>
+        <a href="" ng-click="decrease($index,gitems)" class="fa fa-minus-square" style="text-decoration: none;font-size:25px;color:red"></a>
+        {{gitems.quantity}}
+        <a href="" ng-click="increase(gitems)" class="fa fa-plus-square" style="text-decoration: none;font-size:25px;color: green"></a>
+      </td>
+      <td>{{gitems.price}}</td>
+      <td><button class="cbtn" ng-click="deleteItem($index)"><i class="fa fa-trash"></i></button></td>
+    </tr>
+  </table>
+</div>
