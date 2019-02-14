@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp.view1', ['ngRoute'])
+var app = angular.module('myApp.view1', ['ngRoute','ngStorage'])
 
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/view1', {
@@ -9,7 +9,7 @@ app.config(['$routeProvider', function ($routeProvider) {
   });
 }]);
 
-app.controller('View1Ctrl', function ($scope, shopingItems) {
+app.controller('View1Ctrl', function ($scope,$localStorage,shopingItems) {
 
   $scope.grossTotal = 0;
 
@@ -60,47 +60,50 @@ app.controller('View1Ctrl', function ($scope, shopingItems) {
 
   // change naming convention for variables and add comments for each logic
 
-$scope.getTotal = function(){
-  angular.forEach($scope.cartItem,function(item){
-    //var is not working
-    $scope.total = 0;
-    $scope.total += item.price;
-  });
-  $scope.grossTotal = $scope.total;
-};
+  $scope.getTotal = function () {
+    angular.forEach($scope.cartItem, function (item) {
+      //var is not working
+      $scope.total = 0;
+      $scope.total += item.price;
+    });
+    $scope.grossTotal = $scope.total;
+  };
 
   $scope.addToCart = function (item) {
     // $scope.displayAlert = true;
-    $scope.showCart = true;
+     $scope.showCart = true;
 
-    setTimeout(function () {
-      $scope.displayAlert = false;
-      $scope.$apply();
-    }, 3000);
+    // setTimeout(function () {
+    //   $scope.displayAlert = false;
+    //   $scope.$apply();
+    // }, 3000);
 
-    var found = $scope.findElement(item.name);
-    if (found) {
-      // $scope.cartItem[i].quantity += $scope.shoping[i].quantity;
-      // $scope.cartItem[i].price = $scope.shoping[i].price * $scope.cartItem[i].quantity;
+    // var found = $scope.findElement(item.name);
+    // if (found) {
+    //   // $scope.cartItem[i].quantity += $scope.shoping[i].quantity;
+    //   // $scope.cartItem[i].price = $scope.shoping[i].price * $scope.cartItem[i].quantity;
 
-      alert("Item already in Cart..! Increase quantity in cart for more")
-      // shopingItems.getCost(function($scope.cartItem[i],$scope.shoping[i]){
-      //   $scope.cartItem[i].price = citem.cost;
-      // });
+    //   alert("Item already in Cart..! Increase quantity in cart for more")
+    //   // shopingItems.getCost(function($scope.cartItem[i],$scope.shoping[i]){
+    //   //   $scope.cartItem[i].price = citem.cost;
+    //   // });
 
-    } else {
-      console.log("item pushed");
-      $scope.cartItem.push(angular.copy(item));
-      console.log("successfully");
-      $scope.getTotal();
-    }
+    // } else {
+    //   console.log("item pushed");
+    //   $scope.cartItem.push(angular.copy(item));
+    //   console.log("successfully");
+    //   $scope.getTotal();
+    // }
 
-   
+    
+    $scope.cartItem = shopingItems.add(item);
+    $localStorage.cart = $scope.cartItem;
+
   };
 
- 
 
-  $scope.decrease = function (i,item) {
+
+  $scope.decrease = function (i, item) {
     // if ($scope.cartItem[i].quantity > 1) {
     //   $scope.cartItem[i].quantity = $scope.cartItem[i].quantity - 1;
     //   $scope.cartItem[i].price = $scope.shoping[i].price * $scope.cartItem[i].quantity;

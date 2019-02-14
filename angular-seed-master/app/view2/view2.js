@@ -9,6 +9,6 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 
-app.controller('View2Ctrl', [function() {
-
-}]);
+app.controller('View2Ctrl',function($scope,shopingItems){
+  $scope.cartItem = shopingItems.cartItem;
+});
